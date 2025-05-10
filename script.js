@@ -50,7 +50,8 @@ function adjustVideoOrientation() {
 }
 
 
-adjustVideoOrientation();
+window.addEventListener("orientationchange", adjustVideoOrientation);
+
 
 
 
