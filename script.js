@@ -32,14 +32,23 @@ window.addEventListener("orientationchange", () => {
 function adjustVideoOrientation() {
   const video = document.getElementById("camera");
 
-  if (window.orientation === 180 || window.orientation === 0) {
-    // 縦向き（自然）
-    video.style.transform = currentFacingMode === "user" ? "scaleX(-1)" : "none";
+  if (window.orientation === 90 || window.orientation === -90) {
+    // 横向き（landscape）
+    if (currentFacingMode === "user") {
+      video.style.transform = "scaleX(-1) rotate(180deg)";
+    } else {
+      video.style.transform = "rotate(0deg)";
+    }
   } else {
-    // 横向き（回転対応、必要なら追加反転）
-    video.style.transform = currentFacingMode === "user" ? "scaleX(-1) rotate(180deg)" : "none";
+    // 縦向き（portrait）
+    if (currentFacingMode === "user") {
+      video.style.transform = "scaleX(-1)";
+    } else {
+      video.style.transform = "none";
+    }
   }
 }
+
 
 adjustVideoOrientation();
 
