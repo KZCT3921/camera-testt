@@ -1,4 +1,3 @@
-let currentFacingMode = "environment"; // 最初は外カメラ
 let stream;
 
 async function startCamera() {
@@ -9,7 +8,7 @@ async function startCamera() {
 
   try {
     stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: { exact: currentFacingMode } },
+      video: { facingMode: "environment" }, // 外カメラ指定
       audio: false
     });
 
@@ -30,18 +29,10 @@ function adjustVideoOrientation() {
 
   if (window.orientation === 90 || window.orientation === -90) {
     // 横向き（landscape）
-    if (currentFacingMode === "user") {
-      video.style.transform = "scaleX(-1) rotate(180deg)";
-    } else {
-      video.style.transform = "rotate(0deg)";
-    }
+    video.style.transform = "rotate(0deg)";
   } else {
     // 縦向き（portrait）
-    if (currentFacingMode === "user") {
-      video.style.transform = "scaleX(-1)";
-    } else {
-      video.style.transform = "none";
-    }
+    video.style.transform = "none";
   }
 }
 
