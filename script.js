@@ -41,6 +41,9 @@ function adjustVideoOrientation() {
   }
 }
 
+adjustVideoOrientation();
+
+
 
 // 初期カメラ起動
 startCamera();
