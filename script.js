@@ -1,8 +1,9 @@
-let currentFacingMode = "user"; // 初期は内カメラ
+let currentFacingMode = "user"; // 最初は内カメラ
 let stream;
 
 async function startCamera() {
   if (stream) {
+    // 前のカメラを停止
     stream.getTracks().forEach(track => track.stop());
   }
 
@@ -12,19 +13,11 @@ async function startCamera() {
       audio: false
     });
 
-    const video = document.getElementById("camera");
-    video.srcObject = stream;
+    const videoElement = document.getElementById("camera");
+    videoElement.srcObject = stream;
 
-    // ミラー反転（内カメラのみ）
-    if (currentFacingMode === "user") {
-      video.classList.add("mirror");
-    } else {
-      video.classList.remove("mirror");
-    }
-
-  } catch (error) {
-    console.error("カメラ起動失敗:", error);
-    alert("このカメラは使用できません");
+  } catch (err) {
+    console.error("カメラ取得に失敗:", err);
   }
 }
 
@@ -33,5 +26,32 @@ function switchCamera() {
   startCamera();
 }
 
-// 初回起動
+window.addEventListener("orientationchange", () => {
+  adjustVideoOrientation();
+});
+
+function adjustVideoOrientation() {
+  const video = document.getElementById("camera");
+
+  if (window.orientation === 90 || window.orientation === -90) {
+    // 横向き（landscape）
+    if (currentFacingMode === "user") {
+      video.style.transform = "scaleX(-1) rotate(180deg)";
+    } else {
+      video.style.transform = "rotate(0deg)";
+    }
+  } else {
+    // 縦向き（portrait）
+    if (currentFacingMode === "user") {
+      video.style.transform = "scaleX(-1)";
+    } else {
+      video.style.transform = "none";
+    }
+  }
+}
+
+
+
+// 初期カメラ起動
 startCamera();
+
