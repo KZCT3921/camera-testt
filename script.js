@@ -1,4 +1,4 @@
-let currentFacingMode = "user"; // 最初は内カメラ
+let currentFacingMode = "environment"; // 最初は外カメラ
 let stream;
 
 async function startCamera() {
@@ -50,8 +50,5 @@ function adjustVideoOrientation() {
   }
 }
 
-
-
 // 初期カメラ起動
 startCamera();
-
