@@ -1,16 +1,15 @@
-async function startExternalCamera() {
+async function startCamera() {
   try {
-    const stream = await navigator.mediaDevices.getUserMedia({
-      video: { facingMode: { exact: "environment" } },
+    const constraints = {
+      video: { facingMode: { ideal: "environment" } },
       audio: false
-    });
-
+    };
+    const stream = await navigator.mediaDevices.getUserMedia(constraints);
     const videoElement = document.getElementById("camera");
     videoElement.srcObject = stream;
   } catch (error) {
-    console.error("外カメラの取得に失敗:", error);
-    alert("外カメラが使えない端末か、アクセスが拒否されました。");
+    console.error("カメラの取得に失敗:", error);
+    alert("カメラへのアクセスが拒否されました。");
   }
 }
-
-startExternalCamera();
+startCamera();
