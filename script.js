@@ -21,11 +21,6 @@ async function startCamera() {
   }
 }
 
-function switchCamera() {
-  currentFacingMode = currentFacingMode === "user" ? "environment" : "user";
-  startCamera();
-}
-
 window.addEventListener("orientationchange", () => {
   adjustVideoOrientation();
 });
