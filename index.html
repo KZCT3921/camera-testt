@@ -3,26 +3,42 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>外カメラ専用</title>
+  <title>カメラ切り替え</title>
   <style>
     body {
-      margin: 0;
-      padding: 10px;
-      background: #f0f0f0;
       text-align: center;
       font-family: sans-serif;
+      background-color: #f0f0f0;
+      padding: 1em;
     }
 
     video {
       width: 100%;
       max-width: 600px;
-      border-radius: 12px;
+      border-radius: 10px;
+      margin-bottom: 10px;
+    }
+
+    button {
+      font-size: 18px;
+      padding: 12px 24px;
+      border-radius: 8px;
+      border: none;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+    }
+
+    .mirror {
+      transform: scaleX(-1);
     }
   </style>
 </head>
 <body>
-  <h1>外カメラで表示</h1>
+  <h1>カメラ切り替え</h1>
   <video id="camera" autoplay playsinline></video>
+  <br>
+  <button onclick="switchCamera()">カメラ切り替え</button>
 
   <script src="script.js"></script>
 </body>
