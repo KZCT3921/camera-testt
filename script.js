@@ -25,6 +25,22 @@ function switchCamera() {
   currentFacingMode = currentFacingMode === "user" ? "environment" : "user";
   startCamera();
 }
+window.addEventListener("orientationchange", () => {
+  adjustVideoOrientation();
+});
+
+function adjustVideoOrientation() {
+  const video = document.getElementById("camera");
+
+  if (window.orientation === 180 || window.orientation === 0) {
+    // 縦向き（自然）
+    video.style.transform = currentFacingMode === "user" ? "scaleX(-1)" : "none";
+  } else {
+    // 横向き（回転対応、必要なら追加反転）
+    video.style.transform = currentFacingMode === "user" ? "scaleX(-1) rotate(180deg)" : "none";
+  }
+}
+
 
 // 初期カメラ起動
 startCamera();
